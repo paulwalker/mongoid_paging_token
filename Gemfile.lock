@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid_paging_token (0.0.1)
+    mongoid_paging_token (0.0.2)
       mongoid (~> 3.1.6)
 
 GEM

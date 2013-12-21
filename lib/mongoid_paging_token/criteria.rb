@@ -3,8 +3,15 @@ module MongoidPagingToken
     extend ActiveSupport::Concern
 
     def paging_token
+      paging_token_object.to_s
+    end
+
+    def can_page?
+      paging_token_object.can_page
+    end
+
+    def paging_token_object
       @paging_token ||= MongoidPagingToken::PagingToken.new(self)
-      @paging_token.to_s
     end
   end
 end

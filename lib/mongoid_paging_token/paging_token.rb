@@ -7,15 +7,21 @@ module MongoidPagingToken
     end
 
     def next_page_criteria
-      if sorts.keys.size > 2
-        raise NotImplementedError, 'paging not supported for more than two sorted fields'
+      @next_page_criteria ||= begin
+        if sorts.keys.size > 2
+          raise NotImplementedError, 'paging not supported for more than two sorted fields'
+        end
+        
+        if one_field_sort?
+          one_field_sort_criteria
+        else
+          two_field_sort_criteria
+        end
       end
-      
-      if one_field_sort?
-        one_field_sort_criteria
-      else
-        two_field_sort_criteria
-      end
+    end
+
+    def limit
+      criteria.options[:limit]
     end
 
     def can_page?
@@ -62,10 +68,6 @@ module MongoidPagingToken
 
     def sorts
       criteria.options[:sort]
-    end
-
-    def limit
-      criteria.options[:limit]
     end
 
     def entries
