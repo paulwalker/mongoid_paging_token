@@ -7,7 +7,7 @@ module MongoidPagingToken
     end
 
     def can_page?
-      paging_token_object.can_page
+      paging_token_object.can_page?
     end
 
     def paging_token_object

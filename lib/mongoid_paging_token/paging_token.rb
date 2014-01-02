@@ -11,7 +11,7 @@ module MongoidPagingToken
         if sorts.keys.size > 2
           raise NotImplementedError, 'paging not supported for more than two sorted fields'
         end
-        
+
         if one_field_sort?
           one_field_sort_criteria
         else
@@ -89,7 +89,7 @@ module MongoidPagingToken
 
     def first_condition
       first_condition_value.nil? ?
-        { first_condition => { first_field  => { '$ne' => first_value } } } :
+        { first_condition_field => { '$ne' => first_condition_value } } :
         { first_condition_field => { first_condition_operator => first_condition_value } }
     end
 
