@@ -48,7 +48,7 @@ module MongoidPagingToken
     end
 
     def two_field_sort_criteria
-      while (conditions = criteria.selector['$or'])
+      if (conditions = criteria.selector['$or'])
         match = conditions.any? do |c| 
           c[first_condition_field] && 
             c[first_condition_field].is_a?(Hash) &&
@@ -58,7 +58,6 @@ module MongoidPagingToken
         if match
           if conditions.any? { |c| c.keys == last_condition.keys }
             criteria.selector.delete('$or')
-            break
           end
         end
       end
