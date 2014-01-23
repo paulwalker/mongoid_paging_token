@@ -30,7 +30,7 @@ module MongoidPagingToken
 
     def to_s
       return nil unless can_page?
-      CGI.escape(Base64.encode64(Marshal.dump(next_page_criteria)))
+      Base64.urlsafe_encode64(Marshal.dump(next_page_criteria))
     end
 
     private
@@ -55,10 +55,8 @@ module MongoidPagingToken
             c[first_condition_field].keys.first == first_condition[first_condition_field].keys.first
         end
 
-        if match
-          if conditions.any? { |c| c.keys == last_condition.keys }
-            criteria.selector.delete('$or')
-          end
+        if match && conditions.any? { |c| c.keys == last_condition.keys }
+          criteria.selector.delete('$or')
         end
       end
 
