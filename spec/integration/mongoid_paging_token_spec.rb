@@ -104,12 +104,6 @@ describe MongoidPagingToken do
 
     end
 
-    it 'does not support sorting on more than two fields' do
-      1.upto(2).map do |i|
-        Foo.create! title: 'title', description: "description_#{i}"
-      end
-      expect { Foo.desc(:title, :description, :id).limit(1).paging_token }.to raise_error(NotImplementedError)
-    end
   end
 
 end
