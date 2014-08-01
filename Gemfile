@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 gemspec
 
 group :development do
-  gem 'rails', '~> 3.2'
+  gem 'rails'#, '~> 3.2'
   gem 'bson_ext', :platforms => :ruby
 end
 

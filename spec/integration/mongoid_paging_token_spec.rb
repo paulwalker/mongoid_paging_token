@@ -80,7 +80,7 @@ describe MongoidPagingToken do
         token, results = criteria.paging_token, criteria.entries
 
         expect(token).to be_nil
-        expect(results).to have(1).item
+        expect(results.size).to eq(1)
         expect(results.first.description).to eq('description_9')
       end
 
@@ -98,7 +98,7 @@ describe MongoidPagingToken do
         token, results = criteria.paging_token, criteria.entries
 
         expect(token).to be_nil
-        expect(results).to have(1).item
+        expect(results.size).to eq(1)
         expect(results.first.description).to eq('description_9')
       end
 
